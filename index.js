@@ -1,4 +1,4 @@
-// Clase 02
+// Clase 02 - Functions
 class Product {
   static id = 0;
   constructor(productName, productDescription) {
