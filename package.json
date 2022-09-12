@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/camilaibar/EntregasCoderHouseBackend/issues"
   },
-  "homepage": "https://github.com/camilaibar/EntregasCoderHouseBackend#readme"
+  "homepage": "https://github.com/camilaibar/EntregasCoderHouseBackend#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
 }

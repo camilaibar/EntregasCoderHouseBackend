@@ -1,75 +1,86 @@
-// Clase 02 - Functions
-class Product {
-  static id = 0;
-  constructor(productName, productDescription) {
-    this.productID = Product.id++;
-    this.productName = productName;
-    this.productDescription = productDescription;
+// Clase 03 - Administradores de Paquetes - NPM
+const port = process.env.port || "8082";
+
+// Method HTTP
+/*const http = require("http");
+const app = http.createServer((req, res) => {
+    res.end("Server created");
+});
+
+app.listen(port, () => {
+    console.log("listening port:", port);
+});*/
+
+// Method Express
+const fs = require("fs");
+const express = require("express");
+const app = express();
+
+app.listen(port, (req, res) => {
+  console.log("listening port:", port);
+});
+
+app.get("/", (req, res) => {
+  res.send("Welcome to my backend");
+});
+
+app.get("/products", (req, res) => {
+  let products;
+  try {
+    const file = fs.readFile("./products.json", "utf-8", (error, content) => {
+      if (error) {
+        console.error(error);
+      }
+      let data = JSON.parse(content);
+      if (data?.length === 0) {
+        products = [];
+      }
+      //Profe, lo imprimo de esta manera porque si intento lo que tengo en linea 53 me dice que send esta discontinuado y me da 500. Lo podriamos revisar?
+      data.forEach((element) => {
+        console.log(
+          "Product:",
+          element.id,
+          "Name:",
+          element.name,
+          "Category:",
+          element.category
+        );
+      });
+    });
+  } catch (error) {
+    console.error(error);
   }
+  //res.send("Product list:", products.length > 0 ? products : "No products yet");
+  res.send("Check console for result");
+});
 
-  getProductID() {
-    return this.productID;
+app.get("/randomProduct", (req, res) => {
+  let products;
+  try {
+    const file = fs.readFile("./products.json", "utf-8", (error, content) => {
+      if (error) {
+        console.error(error);
+      }
+      let data = JSON.parse(content);
+      if (data?.length === 0) {
+        products = [];
+      }
+      let id = Math.ceil(Math.random() * data.length);
+      data.forEach((element) => {
+        if (element.id === id) {
+          console.log(
+            "Product:",
+            element.id,
+            "Name:",
+            element.name,
+            "Category:",
+            element.category
+          );
+        }
+      });
+    });
+  } catch (error) {
+    console.error(error);
   }
-  getProductName() {
-    return this.productName;
-  }
-  getProductDescription() {
-    return this.productDescription;
-  }
-  getTotalProductsCounter() {
-    return this.id;
-  }
-  setGlobalCounter(value) {
-    this.id = value;
-  }
-}
-
-let productList = [];
-
-function saveProduct(name, description) {
-  productList.push(new Product(name, description));
-  return productList[productList.lenght - 1];
-}
-
-function getByID(id) {
-  return productList.find((element) => (element.productID = id));
-}
-
-function deleteByID(id) {
-  productList = productList.filter((element) => element.productID != id);
-}
-
-function deleteAll() {
-  productList[0]?.setGlobalCounter(0); //Reset class static counter
-  productList.length = 0; // Empty array
-}
-
-function printAll() {
-  if (productList.length === 0) {
-    console.log([]);
-    return;
-  }
-  productList.forEach((element) => {
-    console.log(
-      "Product:",
-      element.productID,
-      "Name:",
-      element.productName,
-      "Description:",
-      element.productName
-    );
-  });
-}
-
-console.log("Product list:", productList);
-console.log("Load Product list");
-saveProduct("producto01", "descripcion01");
-saveProduct("producto02", "descripcion02");
-saveProduct("producto03", "descripcion03");
-printAll();
-deleteByID(1);
-console.log("Product list after delete of product 1:");
-printAll();
-deleteAll();
-console.log("Product list after full delete:");
-printAll();
+  res.send("Check console for result");
+});
