@@ -1,86 +1,81 @@
-// Clase 03 - Administradores de Paquetes - NPM
+// Clase 04 - Express Avanzado
 const port = process.env.port || "8082";
-
-// Method HTTP
-/*const http = require("http");
-const app = http.createServer((req, res) => {
-    res.end("Server created");
-});
-
-app.listen(port, () => {
-    console.log("listening port:", port);
-});*/
+let productList = [];
 
 // Method Express
 const fs = require("fs");
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.listen(port, (req, res) => {
   console.log("listening port:", port);
 });
 
 app.get("/", (req, res) => {
-  res.send("Welcome to my backend");
+  res.status(200).send("Welcome to my backend");
 });
 
-app.get("/products", (req, res) => {
-  let products;
-  try {
-    const file = fs.readFile("./products.json", "utf-8", (error, content) => {
-      if (error) {
-        console.error(error);
-      }
-      let data = JSON.parse(content);
-      if (data?.length === 0) {
-        products = [];
-      }
-      //Profe, lo imprimo de esta manera porque si intento lo que tengo en linea 53 me dice que send esta discontinuado y me da 500. Lo podriamos revisar?
-      data.forEach((element) => {
-        console.log(
-          "Product:",
-          element.id,
-          "Name:",
-          element.name,
-          "Category:",
-          element.category
-        );
-      });
-    });
-  } catch (error) {
-    console.error(error);
-  }
-  //res.send("Product list:", products.length > 0 ? products : "No products yet");
-  res.send("Check console for result");
+app.get("/api/productos", (req, res) => {
+  res.status(200).send(productList);
 });
 
-app.get("/randomProduct", (req, res) => {
-  let products;
+app.get("/api/productos/:id", (req, res) => {
+  let { id } = req.params;
+  let result = productList.filter((e) => e.id == id);
+  result
+    ? res.status(200).send(result)
+    : res.status(400).send("Product with ID '" + id + "' not found");
+});
+
+app.post("/api/productos", (req, res) => {
   try {
-    const file = fs.readFile("./products.json", "utf-8", (error, content) => {
-      if (error) {
-        console.error(error);
-      }
-      let data = JSON.parse(content);
-      if (data?.length === 0) {
-        products = [];
-      }
-      let id = Math.ceil(Math.random() * data.length);
-      data.forEach((element) => {
-        if (element.id === id) {
-          console.log(
-            "Product:",
-            element.id,
-            "Name:",
-            element.name,
-            "Category:",
-            element.category
-          );
-        }
-      });
-    });
-  } catch (error) {
-    console.error(error);
+    let { product } = req.body;
+    let newProductID = product.id;
+    productList.push(req.body.product);
+    res.status(200).json({ id: newProductID, newProductList: productList });
+  } catch (e) {
+    res.status(400).send(e);
   }
-  res.send("Check console for result");
+});
+
+app.put("/api/productos/:id", (req, res) => {
+  let { id } = req.params;
+  let { product } = req.body;
+  let found = false;
+  productList = productList.map((e) => {
+    if (e.id == id) {
+      found = true;
+      e = product;
+    }
+    return e;
+  });
+  found
+    ? res.status(200).json({
+        result: "Product with ID '" + id + "' updated",
+        newProductList: productList,
+      })
+    : res.status(400).json({
+        result: "Product with ID '" + id + "' not found",
+        newProductList: productList,
+      });
+});
+
+app.delete("/api/productos/:id", (req, res) => {
+  let { id } = req.params;
+  let result = productList.filter((e) => e.id != id);
+  if (result.length < productList.length) {
+    productList = result;
+    res.status(200).json({
+      result: "Product with ID '" + id + "' deleted",
+      newProductList: productList,
+    });
+  } else {
+    res.status(400).json({
+      result: "Product with ID '" + id + "' not found",
+      newProductList: productList,
+    });
+  }
 });
