@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My App</title>
+</head>
+
+<body>
+  <h1>Welcome to my backend</h1>
+  <form action="/api/productos" method="post">
+    <h2>Please add a new product</h2>
+    <fieldset>
+      <legend>
+        <h3>Product Details</h3>
+      </legend>
+      <div style="display:flex; flex-direction: column; flex-wrap: wrap; align-items: flex-start;">
+        <label for="productName">Product name:</label>
+        <input id="productName" type="text" name="name" required>
+        <br />
+        <label for="productDescription">Product description:</label>
+        <input type="text" id="productDescription" name="description" required>
+        <br />
+        <label for="productPrice">Product price:</label>
+        <input type="text" id="productPrice" name="price">
+        <br />
+      </div>
+      <button type="submit">Submit</button>
+    </fieldset>
+  </form>
+</body>
+
+</html>
