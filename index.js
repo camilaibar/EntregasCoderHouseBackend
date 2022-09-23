@@ -1,41 +1,47 @@
 console.log("Primer log");
 
-const user = {
-  name: "Camila",
-  surname: "Ibar",
-  books: [],
-  pets: [],
-};
+// Clase 01 - Principios de programación Backend
+class User {
+  static id = 0;
+  constructor(name, surname, books, pets) {
+    this.id = User.id++;
+    this.name = name;
+    this.surname = surname;
+    this.books = books;
+    this.pets = pets;
+  }
 
-function getFullName() {
-  return user.surname + ", " + user.name;
-}
-function addPets(petName) {
-  return user.pets.push(petName);
-}
-function countPets() {
-  return user.pets.length;
-}
-function addBook(title, authorName) {
-  user.books.push({ name: title, author: authorName });
-}
-function getBookNames() {
-  return user.books.map((book) => book.name);
+  getFullName() {
+    return this.surname + ", " + this.name;
+  }
+  addPets(petName) {
+    return this.pets.push(petName);
+  }
+  countPets() {
+    return this.pets.length;
+  }
+  addBook(title, authorName) {
+    this.books.push({ name: title, author: authorName });
+  }
+  getBookNames() {
+    return this.books.map((book) => book.name);
+  }
 }
 
-addPets("Rocco");
-addPets("Boris");
+const user01 = new User("Camila", "Ibar", [], []);
+user01.addPets("Rocco");
+user01.addPets("Boris");
 
-addBook("Book1", "author1");
-addBook("Book2", "author2");
-addBook("Book3", "author3");
+user01.addBook("Book1", "author1");
+user01.addBook("Book2", "author2");
+user01.addBook("Book3", "author3");
 
 console.log(
-  getFullName() +
+  user01.getFullName() +
     " has " +
-    countPets() +
+    user01.countPets() +
     " pets (" +
-    user.pets +
+    user01.pets +
     ") and likes the following books: " +
-    getBookNames()
+    user01.getBookNames()
 );
