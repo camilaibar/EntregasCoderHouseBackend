@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/productos", productApis);
 
 app.set("views", "./src/views");
-app.set("views engine", "ejs");
+app.set("view engine", "ejs");
 
 app.listen(port, (req, res) => {
   console.log("listening port:", port);
