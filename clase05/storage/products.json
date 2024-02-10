@@ -1,0 +1,29 @@
+[
+  {
+    "pid": 1,
+    "title": "Producto 001",
+    "description": "Description Producto 001",
+    "price": 10,
+    "thumbnail": "",
+    "code": "00001",
+    "stock": 100
+  },
+  {
+    "pid": 2,
+    "title": "Producto 002",
+    "description": "Description Producto 002",
+    "price": 10,
+    "thumbnail": "",
+    "code": "00002",
+    "stock": 100
+  },
+  {
+    "pid": 3,
+    "title": "Producto 003",
+    "description": "Description Producto 003",
+    "price": 10,
+    "thumbnail": "",
+    "code": "00003",
+    "stock": 100
+  }
+]
