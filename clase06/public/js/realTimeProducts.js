@@ -16,5 +16,7 @@ socket.on("welcome", (data) => console.log(data.message));
 socket.on("welcomeNewConnection", (data) => console.log(data.message));
 socket.on("productListChange", (data) => {
   console.log(data.message);
-  // TODO: Reload table
+  // Reload table
+  // Refresh the page
+  location.href = location.href;
 });

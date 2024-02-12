@@ -45,6 +45,7 @@ class ProductManager {
   };
 
   getProducts = () => this.products;
+
   getProductById = (id) => {
     let item = this.products.find((item) => item.id === id);
 
