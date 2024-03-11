@@ -64,4 +64,10 @@ socketServer.on("connection", (socket) => {
       message: `Product list changed by user: ${socket.id}`,
     })
   );
+
+  socket.on("postedMessage", () =>
+    socketServer.emit("newMessage", {
+      message: `User: ${socket.id}, posted a new message`,
+    })
+  );
 });

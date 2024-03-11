@@ -5,12 +5,12 @@ const collectionName = "messages";
 const messagesSchema = new mongoose.Schema({
   user: {
     type: String, //Email
-    require: true,
+    required: true,
     //type: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
   },
   message: {
     type: String,
-    require: true,
+    required: true,
   },
 });
 

@@ -1,10 +1,11 @@
 <h1>Enviar un mensaje</h1>
-<form id="loadForm">
+<form id="loadForm" action="/api/messages" method="post">
     <label for="user">User: </label>
     <input type="text" id="user" name="user" />
     <label for="message">Mensaje: </label>
     <input type="text" id="message" name="message" />
     <button id="loadFormSubmitButton" type="submit">Enviar</button>
+    <button id="deleteAllButton" type="button">Eliminar Todos los Mensajes</button>
 </form>
 </div>
 <br />
@@ -25,4 +26,4 @@
     <p id="empty-state" style="display: none;">No hay mensajes cargados.</p>
 </div>
 <script src="/socket.io/socket.io.js"></script>
-<script src="../static/js/chat.js"></script>
+<script src="../js/chat.js"></script>
