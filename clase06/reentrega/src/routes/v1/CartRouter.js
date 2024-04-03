@@ -47,7 +47,7 @@ cartRouter.post("/:cid/product/:pid", (req, res) => {
 
 module.exports = cartRouter;
 
-// TODO: PENDING ENDPOINTS
+// NOTE: PENDING ENDPOINTS
 // updateCartById = (cart) => {};
 // deleteAllCarts = () => {};
 // deleteCartById = (cid) => {};

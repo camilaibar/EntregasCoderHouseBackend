@@ -21,7 +21,7 @@ class CartManager {
   };
 
   addCart = () => {
-    // TODO: Cada vez que corro esta funcion se me reinicia el servidor
+    // HELP: Cada vez que corro esta funcion se me reinicia el servidor
     const storage = this.getCarts() || [];
     const newCart = new CartManager();
     storage.push({ cid: newCart.cid, products: newCart.products });
